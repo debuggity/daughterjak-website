@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Daughterjak ($DAUGHTER) - Meme Coin on Solana</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --primary: #FF8FAB;        /* Warm pink */
+    --secondary: #FFC2C7;      /* Light pastel pink */
+    --dark-text: #2A1D1F;      /* Deep warm brownish */
+    --light-text: #7D5E63;     /* Muted brownish for body */
+    --bg: #FFF7F9;             /* Light pinkish background */
+    --accent: #FFE8EE;         /* Accent background */
+    --heading-font: 'Baloo 2', cursive;
+    --body-font: 'Nunito', sans-serif;
+    --hero-text-shadow: 1px 1px 2px rgba(0,0,0,0.25);
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--body-font);
+    background: var(--bg);
+    color: var(--light-text);
+  }
+
+  /* Header */
+  .header {
+    background: #ffffffdd;
+    backdrop-filter: blur(5px);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .header .logo {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -1px;
+    font-family: var(--heading-font);
+  }
+
+  .header nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--dark-text);
+    font-size: 18px;
+    transition: color 0.2s;
+  }
+
+  .header nav a:hover {
+    color: var(--primary);
+  }
+
+  /* Emoji Rain Base */
+  .emoji-rain {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0; /* Set a low z-index so it's behind content */
+  }
+
+  .emoji-rain span {
+    position: absolute;
+    top: -10%; /* start above the top */
+    font-size: 2rem;
+    animation: fall linear infinite;
+    opacity: 0.9;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-100%); opacity: 0; }
+    10% {opacity: 1;}
+    100% { transform: translateY(200%); opacity: 0;}
+  }
+
+  .emoji-rain span {
+    animation-duration: calc(5s + 5 * var(--i));
+    animation-delay: calc(0.5s * var(--j));
+  }
+
+  /* We'll position them using nth-child selectors */
+  .emoji-rain span:nth-child(1) {left: 5%; --i:1; --j:1;}
+  .emoji-rain span:nth-child(2) {left: 15%; --i:2; --j:0;}
+  .emoji-rain span:nth-child(3) {left: 25%; --i:1; --j:2;}
+  .emoji-rain span:nth-child(4) {left: 35%; --i:3; --j:1;}
+  .emoji-rain span:nth-child(5) {left: 45%; --i:2; --j:2;}
+  .emoji-rain span:nth-child(6) {left: 55%; --i:4; --j:0;}
+  .emoji-rain span:nth-child(7) {left: 65%; --i:1; --j:3;}
+  .emoji-rain span:nth-child(8) {left: 75%; --i:3; --j:2;}
+  .emoji-rain span:nth-child(9) {left: 85%; --i:2; --j:4;}
+  .emoji-rain span:nth-child(10) {left: 10%; --i:4; --j:1;}
+  .emoji-rain span:nth-child(11) {left: 20%; --i:1; --j:4;}
+  .emoji-rain span:nth-child(12) {left: 30%; --i:2; --j:3;}
+  .emoji-rain span:nth-child(13) {left: 50%; --i:3; --j:4;}
+  .emoji-rain span:nth-child(14) {left: 70%; --i:1; --j:1;}
+  .emoji-rain span:nth-child(15) {left: 90%; --i:4; --j:3;}
+
+  /* Section Wrappers should be relative so emojis can appear behind */
+  .hero, .about, .community, .dex, .maker {
+    position: relative;
+  }
+
+  /* Hero Section - add stars as content */
+  .hero .emoji-rain span::before {
+    content: "⭐";
+  }
+
+  /* About Section - add question marks */
+  .about .emoji-rain span::before {
+    content: "❓";
+  }
+
+  /* Community Section - hugging emojis */
+  .community .emoji-rain span::before {
+    content: "🫂";
+  }
+
+  /* DEX Section - money signs */
+  .dex .emoji-rain span::before {
+    content: "💲";
+  }
+
+  /* Maker Section - hearts */
+  .maker .emoji-rain span::before {
+    content: "❤️";
+  }
+
+  /* Hero Section */
+  .hero {
+    background: url('banner.png') no-repeat center center/cover;;
+    padding: 100px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    color: #fff;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-image {
+    flex: 1 1 300px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-image img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  }
+
+  .hero-text {
+    flex: 1 1 400px;
+    text-shadow: var(--hero-text-shadow);
+  }
+
+  .hero-text h1 {
+    font-family: var(--heading-font);
+    font-size: 64px;
+    margin-bottom: 20px;
+    color: #000000;
+  }
+
+  .hero-text p {
+    font-size: 22px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 500px;
+    color: #000000;
+  }
+
+  .hero-text .cta {
+    background-color: var(--primary);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(255,143,171,0.3);
+    transition: background-color 0.2s, box-shadow 0.2s;
+    font-family: var(--heading-font);
+  }
+
+  .hero-text .cta:hover {
+    background-color: var(--secondary);
+    box-shadow: 0 8px 20px rgba(255,143,171,0.4);
+  }
+
+  /* About Section */
+  .about {
+    padding: 100px 60px; /* Increased horizontal padding */
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+    position: relative;
+  }
+
+  .about h2 {
+    font-size: 48px;
+    color: var(--dark-text);
+    margin-bottom: 20px;
+    font-weight: 800;
+    font-family: var(--heading-font);
+  }
+
+  .about p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 500px;
+  }
+
+  .about-image {
+    flex: 1 1 300px;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .about-image img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+
+  .about-text {
+    flex: 1 1 400px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    margin-top: 40px;
+  }
+
+  .highlight {
+    background: #ffffff;
+    border-radius: 20px;
+    width: 220px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin: 0 auto;
+  }
+
+  .highlight:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+
+  .highlight h3 {
+    font-size: 40px;
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-family: var(--heading-font);
+  }
+
+  .highlight p {
+    font-size: 18px;
+    margin: 0;
+    color: var(--light-text);
+  }
+
+  /* Community Section */
+  .community {
+    padding: 100px 20px;
+    text-align: center;
+    background: var(--accent);
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .community h2 {
+    font-size: 48px;
+    color: var(--dark-text);
+    margin-bottom: 20px;
+    font-weight: 800;
+    font-family: var(--heading-font);
+  }
+
+  .community p {
+    font-size: 20px;
+    max-width: 700px;
+    margin: 0 auto 60px;
+    line-height: 1.6;
+  }
+
+  .community .community-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 0 auto 40px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .community .community-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .social-links a {
+    text-decoration: none;
+    background: white;
+    border: 2px solid var(--primary);
+    padding: 15px 25px;
+    color: var(--dark-text);
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 50px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    font-family: var(--heading-font);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  }
+
+  .social-links a:hover {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255,143,171,0.3);
+  }
+
+  /* DEX Section */
+  .dex {
+    padding: 100px 60px; /* Increased horizontal padding */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+    position: relative;
+  }
+
+  .dex h2 {
+    font-size: 48px;
+    color: var(--dark-text);
+    margin-bottom: 20px;
+    font-weight: 800;
+    font-family: var(--heading-font);
+  }
+
+  .dex p {
+    font-size: 20px;
+    max-width: 500px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .dex .dex-image {
+    flex: 1 1 300px;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .dex .dex-image img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    object-fit: cover;
+  }
+
+  .dex-text {
+    flex: 1 1 400px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .dex-link {
+    display: inline-block;
+    margin-top: 20px;
+    background: var(--primary);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(255,143,171,0.3);
+    transition: background-color 0.2s, box-shadow 0.2s;
+    font-family: var(--heading-font);
+  }
+
+  .dex-link:hover {
+    background-color: var(--secondary);
+    box-shadow: 0 8px 20px rgba(255,143,171,0.4);
+  }
+
+  /* Maker Section */
+  .maker {
+    padding: 100px 20px;
+    text-align: center;
+    background: var(--bg);
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .maker h2 {
+    font-size: 48px;
+    color: var(--dark-text);
+    margin-bottom: 20px;
+    font-weight: 800;
+    font-family: var(--heading-font);
+  }
+
+  .maker p {
+    font-size: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  .maker-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0 auto 40px;
+    background: #ffffff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  .maker-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cta-maker {
+    background-color: var(--primary);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(255,143,171,0.3);
+    transition: background-color 0.2s, box-shadow 0.2s;
+    font-family: var(--heading-font);
+  }
+
+  .cta-maker:hover {
+    background-color: var(--secondary);
+    box-shadow: 0 8px 20px rgba(255,143,171,0.4);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    background: white;
+    color: var(--light-text);
+    font-size: 14px;
+    border-top: 1px solid #f0caca;
+    margin-top: 80px;
+  }
+
+  .footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="logo">Daughterjak</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#community">Community</a>
+    <a href="#dex">DEX</a>
+    <a href="#maker">Maker</a>
+  </nav>
+</div>
+
+<!-- Hero with star emojis -->
+<section class="hero">
+  <div class="emoji-rain">
+    <!-- 15 stars -->
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-image">
+      <img src="stars.png" alt="Daughterjak Stars">
+    </div>
+    <div class="hero-text">
+      <h1>Daughterjak ($DAUGHTER)</h1>
+      <p>The cutest, funniest meme coin on Solana! Inspired by the beloved Wifejak, Daughterjak brings a fresh, youthful charm to the crypto world. Join us as we embrace her curious spirit and endless questions, and let’s take $DAUGHTER to the moon together!</p>
+      <a href="#maker" class="cta">Make Your Daughter</a>
+    </div>
+  </div>
+</section>
+
+<!-- About Section with question marks -->
+<section class="about" id="about">
+  <div class="emoji-rain">
+    <!-- 15 question marks -->
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="about-text">
+    <h2>What is $DAUGHTER?</h2>
+    <p>Daughterjak is a meme token that channels the joyful energy and boundless curiosity of a young daughter. Building on the Wifejak meme lineage, Daughterjak is a community-driven project that thrives on humor, creativity, and a shared love of mischief. It’s not just another token; it’s a story we write together.</p>
+    <div class="highlights">
+      <div class="highlight">
+        <h3>100%</h3>
+        <p>Community-Owned</p>
+      </div>
+      <div class="highlight">
+        <h3>5k+</h3>
+        <p>Active Followers on X</p>
+      </div>
+      <div class="highlight">
+        <h3>24/7</h3>
+        <p>Meme Magic</p>
+      </div>
+    </div>
+  </div>
+  <div class="about-image">
+    <img src="cute.png" alt="Cute Daughterjak">
+  </div>
+</section>
+
+<!-- Community Section with hugging emojis -->
+<section class="community" id="community">
+  <div class="emoji-rain">
+    <!-- 15 hugging emojis -->
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="community-image">
+    <img src="stars.png" alt="Daughterjak Stars">
+  </div>
+  <h2>Join the Family</h2>
+  <p>Daughterjak is all about friends, fun, and memes. Our community hangs out on Telegram, laughs on X, and shares hilarious Daughterjak creations daily. Let’s build this adventure together!</p>
+  
+  <div class="social-links">
+    <a href="https://x.com/Daughterjaksol" target="_blank">X</a>
+    <a href="https://t.me/daughterjakcto" target="_blank">Telegram</a>
+    <a href="https://knowyourmeme.com/memes/daughterjak" target="_blank">Know Your Meme</a>
+  </div>
+</section>
+
+<!-- DEX Section with money signs -->
+<section class="dex" id="dex">
+  <div class="emoji-rain">
+    <!-- 15 money signs -->
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="dex-text">
+    <h2>Get $DAUGHTER</h2>
+    <p>Ready to become part of the Daughterjak story? Trade $DAUGHTER on Solana DEXes and join the ride. Our token address is easy to remember—just as Daughterjak’s questions are endless!</p>
+    <p><strong>Token Address:</strong><br> 
+      <a href="https://dexscreener.com/solana/jve4zgga3e3qiphv4bg6yvuv44ru7ydzugp2lsyzax3" 
+         target="_blank" class="dex-link">
+        E6ZeLyFUvpaSREvAv1rVu91kndLD3tdpvkcA51bxpump
+      </a>
+    </p>
+  </div>
+  <div class="dex-image">
+    <img src="shopping-bag.png" alt="Daughterjak Shopping">
+  </div>
+</section>
+
+<!-- Maker Section with hearts -->
+<section class="maker" id="maker">
+  <div class="emoji-rain">
+    <!-- 15 hearts -->
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="maker-image">
+    <img src="love.png" alt="Daughterjak Love">
+  </div>
+  <h2>Make Your Daughter</h2>
+  <p>Unleash your creativity and generate your own Daughterjak scenario! Swap backgrounds, change outfits, and give your Daughterjak a personality that suits you. Let’s create a new meme magic moment together!</p>
+  <a href="maker.html" class="cta-maker">Launch Maker</a>
+</section>
+
+<!-- Footer -->
+<div class="footer">
+  © 2024 Daughterjak Meme Coin on Solana. All rights reserved. | 
+  <a href="https://knowyourmeme.com/memes/daughterjak" target="_blank">Know Your Meme</a>
+</div>
+
+</body>
+</html>
