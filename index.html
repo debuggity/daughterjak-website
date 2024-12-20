@@ -29,6 +29,16 @@
     color: var(--light-text);
   }
 
+  /* Responsive Utilities */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+
   /* Header */
   .header {
     background: #ffffffdd;
@@ -44,11 +54,12 @@
   }
 
   .header .logo {
-    font-size: 32px;
+    font-size: 1.8rem;
     font-weight: 800;
     color: var(--primary);
     letter-spacing: -1px;
     font-family: var(--heading-font);
+    white-space: nowrap;
   }
 
   .header nav a {
@@ -56,8 +67,9 @@
     text-decoration: none;
     font-weight: 600;
     color: var(--dark-text);
-    font-size: 18px;
+    font-size: 1rem;
     transition: color 0.2s;
+    white-space: nowrap;
   }
 
   .header nav a:hover {
@@ -71,12 +83,12 @@
     width: 100%; height: 100%;
     pointer-events: none;
     overflow: hidden;
-    z-index: 0; /* Set a low z-index so it's behind content */
+    z-index: 0;
   }
 
   .emoji-rain span {
     position: absolute;
-    top: -10%; /* start above the top */
+    top: -10%;
     font-size: 2rem;
     animation: fall linear infinite;
     opacity: 0.9;
@@ -93,7 +105,7 @@
     animation-delay: calc(0.5s * var(--j));
   }
 
-  /* We'll position them using nth-child selectors */
+  /* Positioning for the emoji rain elements */
   .emoji-rain span:nth-child(1) {left: 5%; --i:1; --j:1;}
   .emoji-rain span:nth-child(2) {left: 15%; --i:2; --j:0;}
   .emoji-rain span:nth-child(3) {left: 25%; --i:1; --j:2;}
@@ -110,9 +122,10 @@
   .emoji-rain span:nth-child(14) {left: 70%; --i:1; --j:1;}
   .emoji-rain span:nth-child(15) {left: 90%; --i:4; --j:3;}
 
-  /* Section Wrappers should be relative so emojis can appear behind */
   .hero, .about, .community, .dex, .maker {
     position: relative;
+    box-sizing: border-box;
+    width: 100%;
   }
 
   /* Hero Section - add stars as content */
@@ -142,10 +155,9 @@
 
   /* Hero Section */
   .hero {
-    background: url('banner.png') no-repeat center center/cover;;
+    background: url('banner.png') no-repeat center center/cover;
     padding: 100px 20px;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     text-align: left;
@@ -169,33 +181,39 @@
     flex: 1 1 300px;
     display: flex;
     justify-content: center;
+    align-items: center;
+  }
+
+  /* Dance animation for the hero image */
+  @keyframes danceFlip {
+    0% { transform: scaleX(1); }
+    50% { transform: scaleX(-1); }
+    100% { transform: scaleX(1); }
   }
 
   .hero-image img {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    animation: danceFlip 3s infinite;
+    max-width: 100%;
+    height: auto;
   }
 
   .hero-text {
     flex: 1 1 400px;
     text-shadow: var(--hero-text-shadow);
+    color: #000000;
   }
 
   .hero-text h1 {
     font-family: var(--heading-font);
-    font-size: 64px;
+    font-size: 3rem;
     margin-bottom: 20px;
-    color: #000000;
   }
 
   .hero-text p {
-    font-size: 22px;
+    font-size: 1.2rem;
     line-height: 1.6;
     margin-bottom: 40px;
     max-width: 500px;
-    color: #000000;
   }
 
   .hero-text .cta {
@@ -204,11 +222,12 @@
     padding: 15px 30px;
     border-radius: 50px;
     text-decoration: none;
-    font-size: 24px;
+    font-size: 1.2rem;
     font-weight: 700;
     box-shadow: 0 5px 15px rgba(255,143,171,0.3);
     transition: background-color 0.2s, box-shadow 0.2s;
     font-family: var(--heading-font);
+    display: inline-block;
   }
 
   .hero-text .cta:hover {
@@ -218,7 +237,7 @@
 
   /* About Section */
   .about {
-    padding: 100px 60px; /* Increased horizontal padding */
+    padding: 100px 20px;
     text-align: left;
     display: flex;
     flex-wrap: wrap;
@@ -226,11 +245,10 @@
     max-width: 1200px;
     margin: 0 auto;
     gap: 40px;
-    position: relative;
   }
 
   .about h2 {
-    font-size: 48px;
+    font-size: 2.5rem;
     color: var(--dark-text);
     margin-bottom: 20px;
     font-weight: 800;
@@ -238,10 +256,10 @@
   }
 
   .about p {
-    font-size: 20px;
+    font-size: 1.25rem;
     line-height: 1.6;
     margin-bottom: 40px;
-    max-width: 500px;
+    max-width: 100%;
   }
 
   .about-image {
@@ -253,7 +271,7 @@
 
   .about-image img {
     width: 300px;
-    height: 300px;
+    height: auto;
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -263,19 +281,22 @@
     flex: 1 1 400px;
     position: relative;
     z-index: 2;
+    min-width: 280px;
   }
 
   .highlights {
     display: flex;
     flex-wrap: wrap;
-    gap: 60px;
+    gap: 30px;
     margin-top: 40px;
+    justify-content: flex-start;
   }
 
   .highlight {
     background: #ffffff;
     border-radius: 20px;
-    width: 220px;
+    flex: 1 1 200px;
+    min-width: 180px;
     padding: 30px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.06);
@@ -289,7 +310,7 @@
   }
 
   .highlight h3 {
-    font-size: 40px;
+    font-size: 2.5rem;
     color: var(--primary);
     margin-bottom: 10px;
     font-weight: 700;
@@ -297,7 +318,7 @@
   }
 
   .highlight p {
-    font-size: 18px;
+    font-size: 1rem;
     margin: 0;
     color: var(--light-text);
   }
@@ -307,13 +328,13 @@
     padding: 100px 20px;
     text-align: center;
     background: var(--accent);
-    position: relative;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
   }
 
   .community h2 {
-    font-size: 48px;
+    font-size: 2.5rem;
     color: var(--dark-text);
     margin-bottom: 20px;
     font-weight: 800;
@@ -321,7 +342,7 @@
   }
 
   .community p {
-    font-size: 20px;
+    font-size: 1.25rem;
     max-width: 700px;
     margin: 0 auto 60px;
     line-height: 1.6;
@@ -359,12 +380,13 @@
     border: 2px solid var(--primary);
     padding: 15px 25px;
     color: var(--dark-text);
-    font-size: 20px;
+    font-size: 1rem;
     font-weight: 700;
     border-radius: 50px;
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
     font-family: var(--heading-font);
     box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    white-space: nowrap;
   }
 
   .social-links a:hover {
@@ -375,7 +397,7 @@
 
   /* DEX Section */
   .dex {
-    padding: 100px 60px; /* Increased horizontal padding */
+    padding: 100px 20px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -386,7 +408,7 @@
   }
 
   .dex h2 {
-    font-size: 48px;
+    font-size: 2.5rem;
     color: var(--dark-text);
     margin-bottom: 20px;
     font-weight: 800;
@@ -394,8 +416,8 @@
   }
 
   .dex p {
-    font-size: 20px;
-    max-width: 500px;
+    font-size: 1.25rem;
+    max-width: 100%;
     line-height: 1.6;
     margin-bottom: 20px;
   }
@@ -409,7 +431,7 @@
 
   .dex .dex-image img {
     width: 300px;
-    height: 300px;
+    height: auto;
     border-radius: 50%;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     object-fit: cover;
@@ -419,6 +441,7 @@
     flex: 1 1 400px;
     position: relative;
     z-index: 2;
+    min-width: 280px;
   }
 
   .dex-link {
@@ -429,11 +452,12 @@
     padding: 15px 30px;
     border-radius: 50px;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 1rem;
     font-weight: 700;
     box-shadow: 0 5px 15px rgba(255,143,171,0.3);
     transition: background-color 0.2s, box-shadow 0.2s;
     font-family: var(--heading-font);
+    white-space: nowrap;
   }
 
   .dex-link:hover {
@@ -452,7 +476,7 @@
   }
 
   .maker h2 {
-    font-size: 48px;
+    font-size: 2.5rem;
     color: var(--dark-text);
     margin-bottom: 20px;
     font-weight: 800;
@@ -460,7 +484,7 @@
   }
 
   .maker p {
-    font-size: 20px;
+    font-size: 1.25rem;
     max-width: 700px;
     margin: 0 auto;
     line-height: 1.6;
@@ -489,11 +513,13 @@
     padding: 15px 30px;
     border-radius: 50px;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 1rem;
     font-weight: 700;
     box-shadow: 0 5px 15px rgba(255,143,171,0.3);
     transition: background-color 0.2s, box-shadow 0.2s;
     font-family: var(--heading-font);
+    display: inline-block;
+    white-space: nowrap;
   }
 
   .cta-maker:hover {
@@ -507,7 +533,7 @@
     padding: 40px 20px;
     background: white;
     color: var(--light-text);
-    font-size: 14px;
+    font-size: 0.875rem;
     border-top: 1px solid #f0caca;
     margin-top: 80px;
   }
@@ -516,6 +542,72 @@
     color: var(--primary);
     text-decoration: none;
     font-weight: 700;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .hero-content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .hero-text, .hero-image {
+      flex: none;
+      max-width: 100%;
+    }
+
+    .hero-text h1 {
+      font-size: 2rem;
+    }
+
+    .hero-text p {
+      font-size: 1rem;
+    }
+
+    .about, .dex {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .about-text, .dex-text {
+      max-width: 100%;
+    }
+
+    .about-image, .dex-image {
+      order: -1;
+    }
+
+    .highlight {
+      flex: 1 1 calc(50% - 30px);
+    }
+
+    .community p {
+      font-size: 1rem;
+    }
+
+    .dex p {
+      font-size: 1rem;
+    }
+
+    .maker p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .highlight {
+      flex: 1 1 100%;
+    }
+
+    .social-links a {
+      font-size: 0.9rem;
+      padding: 10px 20px;
+    }
+
+    .dex-link, .cta, .cta-maker {
+      font-size: 0.9rem;
+      padding: 10px 20px;
+    }
   }
 
 </style>
@@ -543,7 +635,7 @@
   </div>
   <div class="hero-content">
     <div class="hero-image">
-      <img src="stars.png" alt="Daughterjak Stars">
+      <img src="dance.png" alt="Daughterjak Dancing">
     </div>
     <div class="hero-text">
       <h1>Daughterjak ($DAUGHTER)</h1>
@@ -646,7 +738,7 @@
 
 <!-- Footer -->
 <div class="footer">
-  © 2024 Daughterjak Meme Coin on Solana. All rights reserved. | 
+  Daughterjak Meme Coin on Solana. | 
   <a href="https://knowyourmeme.com/memes/daughterjak" target="_blank">Know Your Meme</a>
 </div>
 
