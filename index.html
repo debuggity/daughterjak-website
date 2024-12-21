@@ -21,22 +21,27 @@
     --hero-text-shadow: 1px 1px 2px rgba(0,0,0,0.25);
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     margin: 0;
     padding: 0;
     font-family: var(--body-font);
     background: var(--bg);
     color: var(--light-text);
-  }
-
-  /* Responsive Utilities */
-  *, *::before, *::after {
-    box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal scroll if any effect shifts elements */
   }
 
   img, video {
     max-width: 100%;
     height: auto;
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
   }
 
   /* Header */
@@ -76,86 +81,25 @@
     color: var(--primary);
   }
 
-  /* Emoji Rain Base */
-  .emoji-rain {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
+  /* Scroll Fade-In Animation Container */
+  .scroll-animation {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
   }
-
-  .emoji-rain span {
-    position: absolute;
-    top: -10%;
-    font-size: 2rem;
-    animation: fall linear infinite;
-    opacity: 0.9;
-  }
-
-  @keyframes fall {
-    0% { transform: translateY(-100%); opacity: 0; }
-    10% {opacity: 1;}
-    100% { transform: translateY(200%); opacity: 0;}
-  }
-
-  .emoji-rain span {
-    animation-duration: calc(5s + 5 * var(--i));
-    animation-delay: calc(0.5s * var(--j));
-  }
-
-  /* Positioning for the emoji rain elements */
-  .emoji-rain span:nth-child(1) {left: 5%; --i:1; --j:1;}
-  .emoji-rain span:nth-child(2) {left: 15%; --i:2; --j:0;}
-  .emoji-rain span:nth-child(3) {left: 25%; --i:1; --j:2;}
-  .emoji-rain span:nth-child(4) {left: 35%; --i:3; --j:1;}
-  .emoji-rain span:nth-child(5) {left: 45%; --i:2; --j:2;}
-  .emoji-rain span:nth-child(6) {left: 55%; --i:4; --j:0;}
-  .emoji-rain span:nth-child(7) {left: 65%; --i:1; --j:3;}
-  .emoji-rain span:nth-child(8) {left: 75%; --i:3; --j:2;}
-  .emoji-rain span:nth-child(9) {left: 85%; --i:2; --j:4;}
-  .emoji-rain span:nth-child(10) {left: 10%; --i:4; --j:1;}
-  .emoji-rain span:nth-child(11) {left: 20%; --i:1; --j:4;}
-  .emoji-rain span:nth-child(12) {left: 30%; --i:2; --j:3;}
-  .emoji-rain span:nth-child(13) {left: 50%; --i:3; --j:4;}
-  .emoji-rain span:nth-child(14) {left: 70%; --i:1; --j:1;}
-  .emoji-rain span:nth-child(15) {left: 90%; --i:4; --j:3;}
-
-  .hero, .about, .community, .dex, .maker {
-    position: relative;
-    box-sizing: border-box;
-    width: 100%;
-  }
-
-  /* Hero Section - add stars as content */
-  .hero .emoji-rain span::before {
-    content: "⭐";
-  }
-
-  /* About Section - add question marks */
-  .about .emoji-rain span::before {
-    content: "❓";
-  }
-
-  /* Community Section - hugging emojis */
-  .community .emoji-rain span::before {
-    content: "🫂";
-  }
-
-  /* DEX Section - money signs */
-  .dex .emoji-rain span::before {
-    content: "💲";
-  }
-
-  /* Maker Section - hearts */
-  .maker .emoji-rain span::before {
-    content: "❤️";
+  .scroll-animation.animate {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* Hero Section */
   .hero {
-    background: url('banner.png') no-repeat center center/cover;
+    position: relative;
+    /* Parallax-like effect */
+    background: url('banner.png') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed; /* Allows parallax effect on desktops */
     padding: 100px 20px;
     display: flex;
     align-items: center;
@@ -174,7 +118,26 @@
     gap: 40px;
     flex-wrap: wrap;
     position: relative;
-    z-index: 2;
+    z-index: 0;
+  }
+
+  /* Dance animation for the hero image */
+  @keyframes danceFlip {
+    0% {
+      transform: scaleX(1) translateY(0);
+    }
+    25% {
+      transform: scaleX(-1) translateY(-5px);
+    }
+    50% {
+      transform: scaleX(1) translateY(-10px);
+    }
+    75% {
+      transform: scaleX(-1) translateY(-5px);
+    }
+    100% {
+      transform: scaleX(1) translateY(0);
+    }
   }
 
   .hero-image {
@@ -182,19 +145,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  /* Dance animation for the hero image */
-  @keyframes danceFlip {
-    0% { transform: scaleX(1); }
-    50% { transform: scaleX(-1); }
-    100% { transform: scaleX(1); }
+    z-index: 3;
   }
 
   .hero-image img {
     animation: danceFlip 3s infinite;
     max-width: 100%;
     height: auto;
+    z-index: 3;
   }
 
   .hero-text {
@@ -225,14 +183,14 @@
     font-size: 1.2rem;
     font-weight: 700;
     box-shadow: 0 5px 15px rgba(255,143,171,0.3);
-    transition: background-color 0.2s, box-shadow 0.2s;
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
     font-family: var(--heading-font);
     display: inline-block;
   }
-
   .hero-text .cta:hover {
     background-color: var(--secondary);
     box-shadow: 0 8px 20px rgba(255,143,171,0.4);
+    transform: scale(1.05);
   }
 
   /* About Section */
@@ -275,6 +233,11 @@
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .about-image img:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   }
 
   .about-text {
@@ -359,6 +322,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .community .community-image:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   }
 
   .community .community-image img {
@@ -383,7 +352,7 @@
     font-size: 1rem;
     font-weight: 700;
     border-radius: 50px;
-    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
     font-family: var(--heading-font);
     box-shadow: 0 3px 10px rgba(0,0,0,0.06);
     white-space: nowrap;
@@ -393,6 +362,7 @@
     background: var(--primary);
     color: white;
     box-shadow: 0 5px 15px rgba(255,143,171,0.3);
+    transform: translateY(-3px);
   }
 
   /* DEX Section */
@@ -435,6 +405,11 @@
     border-radius: 50%;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .dex .dex-image img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   }
 
   .dex-text {
@@ -455,7 +430,7 @@
     font-size: 1rem;
     font-weight: 700;
     box-shadow: 0 5px 15px rgba(255,143,171,0.3);
-    transition: background-color 0.2s, box-shadow 0.2s;
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
     font-family: var(--heading-font);
     white-space: nowrap;
   }
@@ -463,6 +438,7 @@
   .dex-link:hover {
     background-color: var(--secondary);
     box-shadow: 0 8px 20px rgba(255,143,171,0.4);
+    transform: scale(1.05);
   }
 
   /* Maker Section */
@@ -499,6 +475,11 @@
     background: #ffffff;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .maker-image:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   }
 
   .maker-image img {
@@ -516,15 +497,15 @@
     font-size: 1rem;
     font-weight: 700;
     box-shadow: 0 5px 15px rgba(255,143,171,0.3);
-    transition: background-color 0.2s, box-shadow 0.2s;
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
     font-family: var(--heading-font);
     display: inline-block;
     white-space: nowrap;
   }
-
   .cta-maker:hover {
     background-color: var(--secondary);
     box-shadow: 0 8px 20px rgba(255,143,171,0.4);
+    transform: scale(1.05);
   }
 
   /* Footer */
@@ -545,21 +526,24 @@
   }
 
   /* Responsive Adjustments */
+  @media (max-width: 1000px) {
+    .hero {
+      background-attachment: scroll; /* Disable parallax on smaller screens for performance */
+    }
+  }
+
   @media (max-width: 768px) {
     .hero-content {
       flex-direction: column;
       text-align: center;
     }
-
     .hero-text, .hero-image {
       flex: none;
       max-width: 100%;
     }
-
     .hero-text h1 {
       font-size: 2rem;
     }
-
     .hero-text p {
       font-size: 1rem;
     }
@@ -568,27 +552,17 @@
       flex-direction: column;
       text-align: center;
     }
-
     .about-text, .dex-text {
       max-width: 100%;
     }
-
     .about-image, .dex-image {
       order: -1;
     }
-
     .highlight {
       flex: 1 1 calc(50% - 30px);
     }
-
-    .community p {
-      font-size: 1rem;
-    }
-
-    .dex p {
-      font-size: 1rem;
-    }
-
+    .community p,
+    .dex p,
     .maker p {
       font-size: 1rem;
     }
@@ -598,18 +572,15 @@
     .highlight {
       flex: 1 1 100%;
     }
-
     .social-links a {
       font-size: 0.9rem;
       padding: 10px 20px;
     }
-
     .dex-link, .cta, .cta-maker {
       font-size: 0.9rem;
       padding: 10px 20px;
     }
   }
-
 </style>
 </head>
 <body>
@@ -625,14 +596,8 @@
   </nav>
 </div>
 
-<!-- Hero with star emojis -->
-<section class="hero">
-  <div class="emoji-rain">
-    <!-- 15 stars -->
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-  </div>
+<!-- Hero -->
+<section class="hero scroll-animation">
   <div class="hero-content">
     <div class="hero-image">
       <img src="dance.png" alt="Daughterjak Dancing">
@@ -645,14 +610,8 @@
   </div>
 </section>
 
-<!-- About Section with question marks -->
-<section class="about" id="about">
-  <div class="emoji-rain">
-    <!-- 15 question marks -->
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-  </div>
+<!-- About Section -->
+<section class="about scroll-animation" id="about">
   <div class="about-text">
     <h2>What is $DAUGHTER?</h2>
     <p>Daughterjak is a meme token that channels the joyful energy and boundless curiosity of a young daughter. Building on the Wifejak meme lineage, Daughterjak is a community-driven project that thrives on humor, creativity, and a shared love of mischief. It’s not just another token; it’s a story we write together.</p>
@@ -676,14 +635,8 @@
   </div>
 </section>
 
-<!-- Community Section with hugging emojis -->
-<section class="community" id="community">
-  <div class="emoji-rain">
-    <!-- 15 hugging emojis -->
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-  </div>
+<!-- Community Section -->
+<section class="community scroll-animation" id="community">
   <div class="community-image">
     <img src="stars.png" alt="Daughterjak Stars">
   </div>
@@ -697,14 +650,8 @@
   </div>
 </section>
 
-<!-- DEX Section with money signs -->
-<section class="dex" id="dex">
-  <div class="emoji-rain">
-    <!-- 15 money signs -->
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-  </div>
+<!-- DEX Section -->
+<section class="dex scroll-animation" id="dex">
   <div class="dex-text">
     <h2>Get $DAUGHTER</h2>
     <p>Ready to become part of the Daughterjak story? Trade $DAUGHTER on Solana DEXes and join the ride. Our token address is easy to remember—just as Daughterjak’s questions are endless!</p>
@@ -720,14 +667,8 @@
   </div>
 </section>
 
-<!-- Maker Section with hearts -->
-<section class="maker" id="maker">
-  <div class="emoji-rain">
-    <!-- 15 hearts -->
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-  </div>
+<!-- Maker Section -->
+<section class="maker scroll-animation" id="maker">
   <div class="maker-image">
     <img src="love.png" alt="Daughterjak Love">
   </div>
@@ -742,5 +683,101 @@
   <a href="https://knowyourmeme.com/memes/daughterjak" target="_blank">Know Your Meme</a>
 </div>
 
+<!-- New Emoji-From-Cursor Script -->
+<script>
+/**
+ * This script spawns a small emoji at the cursor or finger location,
+ * then animates it outward in a quick burst before fading away.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const emojis = ["⭐", "❓", "🫂", "💲", "❤️"];
+
+  // Container to hold our floating emojis
+  const emojiContainer = document.createElement('div');
+  emojiContainer.style.position = 'fixed';
+  emojiContainer.style.top = 0;
+  emojiContainer.style.left = 0;
+  emojiContainer.style.width = '100%';
+  emojiContainer.style.height = '100%';
+  emojiContainer.style.zIndex = 1;
+  emojiContainer.style.pointerEvents = 'none';
+  emojiContainer.style.overflow = 'hidden';
+  document.body.appendChild(emojiContainer);
+
+  // Function to spawn and animate an emoji at (x, y)
+  function spawnEmoji(x, y) {
+    const emojiEl = document.createElement('span');
+    emojiEl.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    emojiEl.style.position = 'absolute';
+    emojiEl.style.left = x + 'px';
+    emojiEl.style.top = y + 'px';
+    emojiEl.style.fontSize = '1.5rem';
+    emojiEl.style.opacity = '1';
+    emojiEl.style.userSelect = 'none';
+    emojiContainer.appendChild(emojiEl);
+
+    // Animate outward in a random direction
+    const horizontalMove = (Math.random() - 0.5) * 200; // -100 to 100
+    const verticalMove = (Math.random() - 1) * 200;    // bias going up
+
+    let start;
+    const duration = 800; // total animation time in ms
+
+    function animateEmoji(timestamp) {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Move and fade out
+      const currentX = x + horizontalMove * progress;
+      const currentY = y + verticalMove * progress;
+      emojiEl.style.transform = `translate(${currentX - x}px, ${currentY - y}px)`;
+      emojiEl.style.opacity = (1 - progress).toString();
+
+      if (progress < 1) {
+        requestAnimationFrame(animateEmoji);
+      } else {
+        // Remove the emoji once animation is complete
+        emojiContainer.removeChild(emojiEl);
+      }
+    }
+
+    requestAnimationFrame(animateEmoji);
+  }
+
+  // Mouse move listener
+  document.addEventListener('mousemove', (e) => {
+    spawnEmoji(e.clientX, e.clientY);
+  });
+
+  // Touch move listener (for mobile)
+  document.addEventListener('touchmove', (e) => {
+    // for each touch, spawn an emoji
+    for (let i = 0; i < e.touches.length; i++) {
+      spawnEmoji(e.touches[i].clientX, e.touches[i].clientY);
+    }
+  });
+
+  /* Scroll-based fade-in animations using IntersectionObserver */
+  const scrollElements = document.querySelectorAll('.scroll-animation');
+  const observerOptions = {
+    root: null,
+    threshold: 0.2
+  };
+
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate');
+        scrollObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  scrollElements.forEach(el => {
+    scrollObserver.observe(el);
+  });
+});
+</script>
 </body>
 </html>
