@@ -8,522 +8,876 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+<!-- OPTIONAL: Animate.css for fancy transitions -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+<!-- OPTIONAL: Typed.js script for text typing effect in the hero -->
+<!-- We will load it in the <head> just so it's ready, or you can load in body. -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
 <style>
   :root {
-    --primary: #FF8FAB;        /* Warm pink */
-    --secondary: #FFC2C7;      /* Light pastel pink */
-    --dark-text: #2A1D1F;      /* Deep warm brownish */
-    --light-text: #7D5E63;     /* Muted brownish for body */
-    --bg: #FFF7F9;             /* Light pinkish background */
-    --accent: #FFE8EE;         /* Accent background */
-    --heading-font: 'Baloo 2', cursive;
-    --body-font: 'Nunito', sans-serif;
-    --hero-text-shadow: 1px 1px 2px rgba(0,0,0,0.25);
-  }
+  --primary: #FF8FAB;        /* Warm pink */
+  --secondary: #FFC2C7;      /* Light pastel pink */
+  --dark-text: #2A1D1F;      /* Deep warm brownish */
+  --light-text: #7D5E63;     /* Muted brownish for body */
+  --bg: #FFF7F9;             /* Light pinkish background */
+  --accent: #FFE8EE;         /* Accent background */
+  --heading-font: 'Baloo 2', cursive;
+  --body-font: 'Nunito', sans-serif;
 
-  * {
-    box-sizing: border-box;
-  }
+  /* NEW COLORS FOR DARK MODE */
+  --dark-bg: #1a1a1a;
+  --dark-primary: #FFAAC2;
+  --dark-secondary: #bbbbbb;
+  --hero-text-shadow: none; /* Removed text shadow for better visibility */
+}
 
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: var(--body-font);
-    background: var(--bg);
-    color: var(--light-text);
-    overflow-x: hidden; /* Prevent horizontal scroll if any effect shifts elements */
-  }
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+}
 
-  img, video {
-    max-width: 100%;
-    height: auto;
-  }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--body-font);
+  background: linear-gradient(120deg, var(--bg) 50%, #ffffff 50%);
+  color: var(--light-text);
+  overflow-x: hidden; /* Prevent horizontal scroll if any effect shifts elements */
+  transition: background 0.3s ease, color 0.3s ease;
+}
 
-  /* Smooth scrolling for anchor links */
-  html {
-    scroll-behavior: smooth;
-  }
+/* Dark mode body override */
+body.dark-mode {
+  background: linear-gradient(120deg, var(--dark-bg) 50%, #333333 50%);
+  color: var(--dark-secondary);
+}
 
-  /* Header */
-  .header {
-    background: #ffffffdd;
-    backdrop-filter: blur(5px);
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  }
+/* Images and Videos */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
 
-  .header .logo {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--primary);
-    letter-spacing: -1px;
-    font-family: var(--heading-font);
-    white-space: nowrap;
-  }
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
 
-  .header nav a {
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: 600;
-    color: var(--dark-text);
-    font-size: 1rem;
-    transition: color 0.2s;
-    white-space: nowrap;
-  }
+/* Header */
+.header {
+  background: #ffffffdd;
+  backdrop-filter: blur(5px);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: background 0.3s ease;
+}
 
-  .header nav a:hover {
-    color: var(--primary);
-  }
+/* Dark mode header */
+body.dark-mode .header {
+  background: #2c2c2cdd;
+}
 
-  /* Scroll Fade-In Animation Container */
-  .scroll-animation {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    will-change: opacity, transform;
-  }
-  .scroll-animation.animate {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.header .logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -1px;
+  font-family: var(--heading-font);
+  white-space: nowrap;
+}
 
-  /* Hero Section */
+body.dark-mode .header .logo {
+  color: var(--dark-primary);
+}
+
+.header nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--dark-text);
+  font-size: 1rem;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+body.dark-mode .header nav a {
+  color: var(--dark-secondary);
+}
+
+.header nav a:hover {
+  color: var(--primary);
+}
+
+body.dark-mode .header nav a:hover {
+  color: var(--dark-primary);
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+  background: none;
+  border: 2px solid var(--primary);
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--dark-text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+body.dark-mode .dark-mode-toggle {
+  border-color: var(--dark-primary);
+  color: var(--dark-secondary);
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+  background: var(--dark-primary);
+  color: #fff;
+}
+
+/* Scroll Fade-In Animation Container */
+.scroll-animation {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.scroll-animation.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  /* Original background image */
+  background: url('banner.png') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed; /* Parallax effect */
+  padding: 100px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  color: #fff;
+}
+
+body.dark-mode .hero {
+  background-image: none; /* Hide background image in dark mode */
+  background-color: var(--dark-bg); /* Optional: Set a dark background color */
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: row;
+  max-width: 1200px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 0;
+}
+
+/* Dance animation for the hero image */
+@keyframes danceFlip {
+  0% {
+      transform: rotateY(0deg);
+  }
+  50% {
+      transform: rotateY(180deg);
+  }
+  100% {
+      transform: rotateY(360deg);
+  }
+}
+
+.hero-image {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+
+body.dark-mode .hero-image {
+  display: none; /* Hide hero image in dark mode */
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  z-index: 3;
+}
+
+.hero-text {
+  flex: 1 1 400px;
+  color: #000000;
+  /* Text shadow removed for better visibility */
+}
+
+.hero-text h1 {
+  font-family: var(--heading-font);
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  max-width: 500px;
+  color: var(--dark-text);
+}
+
+body.dark-mode .hero-text p {
+  color: #dddddd; /* Lighten paragraph text in dark mode */
+}
+
+body.dark-mode .hero-text h1 {
+  color: #ffffff; /* Ensure the heading is clearly visible */
+  text-shadow: none; /* Remove text shadow */
+}
+
+.hero-text .cta {
+  background-color: var(--primary);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  box-shadow: 0 5px 15px rgba(255,143,171,0.3);
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-family: var(--heading-font);
+  display: inline-block;
+}
+
+.hero-text .cta:hover {
+  background-color: var(--secondary);
+  box-shadow: 0 8px 20px rgba(255,143,171,0.4);
+  transform: scale(1.05);
+}
+
+/* Dark mode cta color shift */
+body.dark-mode .hero-text .cta {
+  background-color: var(--dark-primary);
+}
+
+body.dark-mode .hero-text .cta:hover {
+  background-color: var(--secondary);
+}
+
+/* About Section */
+.about {
+  padding: 100px 20px;
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+.about h2 {
+  font-size: 2.5rem;
+  color: var(--dark-text);
+  margin-bottom: 20px;
+  font-weight: 800;
+  font-family: var(--heading-font);
+}
+
+body.dark-mode .about h2 {
+  color: var(--dark-primary);
+}
+
+.about p {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  max-width: 100%;
+}
+
+body.dark-mode .about p {
+  color: #dddddd; /* Lighten text in dark mode */
+}
+
+.about-image {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+}
+
+.about-image img {
+  width: 300px;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-image img:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.about-text {
+  flex: 1 1 400px;
+  position: relative;
+  z-index: 2;
+  min-width: 280px;
+}
+
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 40px;
+  justify-content: flex-start;
+}
+
+.highlight {
+  background: #ffffff;
+  border-radius: 20px;
+  flex: 1 1 200px;
+  min-width: 180px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin: 0 auto;
+}
+
+.highlight:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.highlight h3 {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-family: var(--heading-font);
+}
+
+.highlight p {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--light-text);
+}
+
+body.dark-mode .highlight {
+  background: #3a3a3a; /* Darker background for highlights in dark mode */
+}
+
+body.dark-mode .highlight h3 {
+  color: var(--dark-primary);
+}
+
+body.dark-mode .highlight p {
+  color: #cccccc; /* Lighten text in highlights */
+}
+
+/* Community Section */
+.community {
+  padding: 100px 20px;
+  text-align: center;
+  background: var(--accent);
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+body.dark-mode .community {
+  background: #444;
+}
+
+.community h2 {
+  font-size: 2.5rem;
+  color: var(--dark-text);
+  margin-bottom: 20px;
+  font-weight: 800;
+  font-family: var(--heading-font);
+}
+
+body.dark-mode .community h2 {
+  color: var(--dark-primary);
+}
+
+.community p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto 60px;
+  line-height: 1.6;
+}
+
+body.dark-mode .community p {
+  color: #dddddd; /* Lighten text in dark mode */
+}
+
+.community .community-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: #fff;
+  margin: 0 auto 40px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.community .community-image:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.community .community-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.social-links a {
+  text-decoration: none;
+  background: white;
+  border: 2px solid var(--primary);
+  padding: 15px 25px;
+  color: var(--dark-text);
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 50px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-family: var(--heading-font);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  white-space: nowrap;
+}
+
+.social-links a:hover {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 5px 15px rgba(255,143,171,0.3);
+  transform: translateY(-3px);
+}
+
+body.dark-mode .social-links a {
+  background: #2c2c2c;
+  border-color: var(--dark-primary);
+  color: var(--dark-secondary);
+}
+
+body.dark-mode .social-links a:hover {
+  background: var(--dark-primary);
+  color: #fff;
+}
+
+/* DEX Section */
+.dex {
+  padding: 100px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+  position: relative;
+}
+
+.dex h2 {
+  font-size: 2.5rem;
+  color: var(--dark-text);
+  margin-bottom: 20px;
+  font-weight: 800;
+  font-family: var(--heading-font);
+}
+
+body.dark-mode .dex h2 {
+  color: var(--dark-primary);
+}
+
+.dex p {
+  font-size: 1.25rem;
+  max-width: 100%;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: var(--light-text);
+}
+
+body.dark-mode .dex p {
+  color: #dddddd; /* Lighten text in dark mode */
+}
+
+.dex .dex-image {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+}
+
+.dex .dex-image img {
+  width: 300px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dex .dex-image img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.dex-text {
+  flex: 1 1 400px;
+  position: relative;
+  z-index: 2;
+  min-width: 280px;
+}
+
+.dex-link {
+  display: inline-block;
+  margin-top: 20px;
+  background: var(--primary);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 5px 15px rgba(255,143,171,0.3);
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-family: var(--heading-font);
+  white-space: nowrap;
+}
+
+.dex-link:hover {
+  background-color: var(--secondary);
+  box-shadow: 0 8px 20px rgba(255,143,171,0.4);
+  transform: scale(1.05);
+}
+
+body.dark-mode .dex-link {
+  background: var(--dark-primary);
+}
+
+body.dark-mode .dex-link:hover {
+  background: var(--secondary);
+}
+
+/* Maker Section */
+.maker {
+  padding: 100px 20px;
+  text-align: center;
+  background: var(--bg);
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+body.dark-mode .maker {
+  background: #2c2c2c;
+}
+
+.maker h2 {
+  font-size: 2.5rem;
+  color: var(--dark-text);
+  margin-bottom: 20px;
+  font-weight: 800;
+  font-family: var(--heading-font);
+}
+
+body.dark-mode .maker h2 {
+  color: var(--dark-primary);
+}
+
+.maker p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  color: var(--light-text);
+}
+
+body.dark-mode .maker p {
+  color: #dddddd; /* Lighten text in dark mode */
+  font-weight: 600;
+}
+
+.maker-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: 0 auto 40px;
+  background: #ffffff;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.maker-image:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.maker-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cta-maker {
+  background-color: var(--primary);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 5px 15px rgba(255,143,171,0.3);
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-family: var(--heading-font);
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.cta-maker:hover {
+  background-color: var(--secondary);
+  box-shadow: 0 8px 20px rgba(255,143,171,0.4);
+  transform: scale(1.05);
+}
+
+body.dark-mode .cta-maker {
+  background-color: var(--dark-primary);
+}
+
+body.dark-mode .cta-maker:hover {
+  background-color: var(--secondary);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  color: var(--light-text);
+  font-size: 0.875rem;
+  border-top: 1px solid #f0caca;
+  margin-top: 80px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .footer {
+  background: #2c2c2c;
+  color: var(--dark-secondary);
+}
+
+.footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+body.dark-mode .footer a {
+  color: var(--dark-primary);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1000px) {
   .hero {
-    position: relative;
-    /* Parallax-like effect */
-    background: url('banner.png') no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed; /* Allows parallax effect on desktops */
-    padding: 100px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-    color: #fff;
+    background-attachment: scroll; /* Disable parallax on smaller screens for performance */
   }
+}
 
+@media (max-width: 768px) {
   .hero-content {
-    display: flex;
-    flex-direction: row;
-    max-width: 1200px;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 0;
+    flex-direction: column;
+    text-align: center;
   }
-
-  /* Dance animation for the hero image */
-  @keyframes danceFlip {
-    0% {
-      transform: scaleX(1) translateY(0);
-    }
-    25% {
-      transform: scaleX(-1) translateY(-5px);
-    }
-    50% {
-      transform: scaleX(1) translateY(-10px);
-    }
-    75% {
-      transform: scaleX(-1) translateY(-5px);
-    }
-    100% {
-      transform: scaleX(1) translateY(0);
-    }
-  }
-
-  .hero-image {
-    flex: 1 1 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 3;
-  }
-
-  .hero-image img {
-    animation: danceFlip 3s infinite;
+  .hero-text, .hero-image {
+    flex: none;
     max-width: 100%;
-    height: auto;
-    z-index: 3;
   }
-
-  .hero-text {
-    flex: 1 1 400px;
-    text-shadow: var(--hero-text-shadow);
-    color: #000000;
-  }
-
   .hero-text h1 {
-    font-family: var(--heading-font);
-    font-size: 3rem;
-    margin-bottom: 20px;
+    font-size: 2rem;
   }
-
   .hero-text p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 40px;
-    max-width: 500px;
+    font-size: 1rem;
   }
 
-  .hero-text .cta {
-    background-color: var(--primary);
-    color: white;
-    padding: 15px 30px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 700;
-    box-shadow: 0 5px 15px rgba(255,143,171,0.3);
-    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
-    font-family: var(--heading-font);
-    display: inline-block;
+  .about, .dex {
+    flex-direction: column;
+    text-align: center;
   }
-  .hero-text .cta:hover {
-    background-color: var(--secondary);
-    box-shadow: 0 8px 20px rgba(255,143,171,0.4);
-    transform: scale(1.05);
-  }
-
-  /* About Section */
-  .about {
-    padding: 100px 20px;
-    text-align: left;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 40px;
-  }
-
-  .about h2 {
-    font-size: 2.5rem;
-    color: var(--dark-text);
-    margin-bottom: 20px;
-    font-weight: 800;
-    font-family: var(--heading-font);
-  }
-
-  .about p {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    margin-bottom: 40px;
+  .about-text, .dex-text {
     max-width: 100%;
   }
-
-  .about-image {
-    flex: 1 1 300px;
-    display: flex;
-    justify-content: center;
-    z-index: 2;
+  .about-image, .dex-image {
+    order: -1;
   }
-
-  .about-image img {
-    width: 300px;
-    height: auto;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .about-image img:hover {
-    transform: translateY(-5px) scale(1.03);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  }
-
-  .about-text {
-    flex: 1 1 400px;
-    position: relative;
-    z-index: 2;
-    min-width: 280px;
-  }
-
-  .highlights {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    margin-top: 40px;
-    justify-content: flex-start;
-  }
-
   .highlight {
-    background: #ffffff;
-    border-radius: 20px;
-    flex: 1 1 200px;
-    min-width: 180px;
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    transition: transform 0.2s, box-shadow 0.2s;
-    margin: 0 auto;
+    flex: 1 1 calc(50% - 30px);
   }
-
-  .highlight:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  }
-
-  .highlight h3 {
-    font-size: 2.5rem;
-    color: var(--primary);
-    margin-bottom: 10px;
-    font-weight: 700;
-    font-family: var(--heading-font);
-  }
-
-  .highlight p {
-    font-size: 1rem;
-    margin: 0;
-    color: var(--light-text);
-  }
-
-  /* Community Section */
-  .community {
-    padding: 100px 20px;
-    text-align: center;
-    background: var(--accent);
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  .community h2 {
-    font-size: 2.5rem;
-    color: var(--dark-text);
-    margin-bottom: 20px;
-    font-weight: 800;
-    font-family: var(--heading-font);
-  }
-
-  .community p {
-    font-size: 1.25rem;
-    max-width: 700px;
-    margin: 0 auto 60px;
-    line-height: 1.6;
-  }
-
-  .community .community-image {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: #fff;
-    margin: 0 auto 40px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .community .community-image:hover {
-    transform: translateY(-5px) scale(1.03);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  }
-
-  .community .community-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .social-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
-  }
-
-  .social-links a {
-    text-decoration: none;
-    background: white;
-    border: 2px solid var(--primary);
-    padding: 15px 25px;
-    color: var(--dark-text);
-    font-size: 1rem;
-    font-weight: 700;
-    border-radius: 50px;
-    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
-    font-family: var(--heading-font);
-    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
-    white-space: nowrap;
-  }
-
-  .social-links a:hover {
-    background: var(--primary);
-    color: white;
-    box-shadow: 0 5px 15px rgba(255,143,171,0.3);
-    transform: translateY(-3px);
-  }
-
-  /* DEX Section */
-  .dex {
-    padding: 100px 20px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 40px;
-    position: relative;
-  }
-
-  .dex h2 {
-    font-size: 2.5rem;
-    color: var(--dark-text);
-    margin-bottom: 20px;
-    font-weight: 800;
-    font-family: var(--heading-font);
-  }
-
-  .dex p {
-    font-size: 1.25rem;
-    max-width: 100%;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-
-  .dex .dex-image {
-    flex: 1 1 300px;
-    display: flex;
-    justify-content: center;
-    z-index: 2;
-  }
-
-  .dex .dex-image img {
-    width: 300px;
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    object-fit: cover;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .dex .dex-image img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  }
-
-  .dex-text {
-    flex: 1 1 400px;
-    position: relative;
-    z-index: 2;
-    min-width: 280px;
-  }
-
-  .dex-link {
-    display: inline-block;
-    margin-top: 20px;
-    background: var(--primary);
-    color: white;
-    padding: 15px 30px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 700;
-    box-shadow: 0 5px 15px rgba(255,143,171,0.3);
-    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
-    font-family: var(--heading-font);
-    white-space: nowrap;
-  }
-
-  .dex-link:hover {
-    background-color: var(--secondary);
-    box-shadow: 0 8px 20px rgba(255,143,171,0.4);
-    transform: scale(1.05);
-  }
-
-  /* Maker Section */
-  .maker {
-    padding: 100px 20px;
-    text-align: center;
-    background: var(--bg);
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  .maker h2 {
-    font-size: 2.5rem;
-    color: var(--dark-text);
-    margin-bottom: 20px;
-    font-weight: 800;
-    font-family: var(--heading-font);
-  }
-
+  .community p,
+  .dex p,
   .maker p {
-    font-size: 1.25rem;
-    max-width: 700px;
-    margin: 0 auto;
-    line-height: 1.6;
-    margin-bottom: 40px;
-  }
-
-  .maker-image {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    margin: 0 auto 40px;
-    background: #ffffff;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .maker-image:hover {
-    transform: translateY(-5px) scale(1.03);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  }
-
-  .maker-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .cta-maker {
-    background-color: var(--primary);
-    color: white;
-    padding: 15px 30px;
-    border-radius: 50px;
-    text-decoration: none;
     font-size: 1rem;
-    font-weight: 700;
-    box-shadow: 0 5px 15px rgba(255,143,171,0.3);
-    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
-    font-family: var(--heading-font);
-    display: inline-block;
-    white-space: nowrap;
   }
-  .cta-maker:hover {
-    background-color: var(--secondary);
-    box-shadow: 0 8px 20px rgba(255,143,171,0.4);
-    transform: scale(1.05);
-  }
+}
 
-  /* Footer */
-  .footer {
-    text-align: center;
-    padding: 40px 20px;
-    background: white;
-    color: var(--light-text);
-    font-size: 0.875rem;
-    border-top: 1px solid #f0caca;
-    margin-top: 80px;
+@media (max-width: 480px) {
+  .highlight {
+    flex: 1 1 100%;
   }
+  .social-links a {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+  .dex-link, .cta, .cta-maker {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+}
 
-  .footer a {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 700;
-  }
+/* Scroll-to-top button */
+#scrollToTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 200;
+  background: var(--primary);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 5px 15px rgba(255,143,171,0.3);
+  cursor: pointer;
+  display: none; /* default hidden */
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#scrollToTopBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(255,143,171,0.4);
+}
+
+body.dark-mode #scrollToTopBtn {
+  background: var(--dark-primary);
+  color: #fff;
+}
+
+/* Additional Dark Mode Adjustments */
+
+/* General Text Adjustments in Dark Mode */
+body.dark-mode {
+  color: #cccccc; /* Base text color */
+}
+
+body.dark-mode .header nav a {
+  color: #bbbbbb; /* Navigation links */
+}
+
+body.dark-mode .header nav a:hover {
+  color: var(--dark-primary); /* Hover state */
+}
+
+body.dark-mode .footer {
+  color: #aaaaaa; /* Footer text */
+}
+
+body.dark-mode .footer a {
+  color: var(--dark-primary); /* Footer links */
+}
+
+/* About Section in Dark Mode */
+body.dark-mode .about h2 {
+  color: var(--dark-primary);
+}
+
+body.dark-mode .about p {
+  color: #dddddd;
+}
+
+/* Community Section in Dark Mode */
+body.dark-mode .community h2 {
+  color: var(--dark-primary);
+}
+
+body.dark-mode .community p {
+  color: #dddddd;
+}
+
+/* DEX Section in Dark Mode */
+body.dark-mode .dex h2 {
+  color: var(--dark-primary);
+}
+
+body.dark-mode .dex p {
+  color: #dddddd;
+}
+
+/* Maker Section in Dark Mode */
+body.dark-mode .maker h2 {
+  color: var(--dark-primary);
+}
+
+body.dark-mode .maker p {
+  color: #dddddd;
+}
+
+/* Button Adjustments in Dark Mode */
+body.dark-mode .cta, 
+body.dark-mode .cta-maker, 
+body.dark-mode .dex-link {
+  background-color: var(--dark-primary);
+  color: #ffffff;
+}
+
+body.dark-mode .cta:hover, 
+body.dark-mode .cta-maker:hover, 
+body.dark-mode .dex-link:hover {
+  background-color: var(--secondary);
+  color: #ffffff;
+}
+
+/* Image Adjustments in Dark Mode */
+body.dark-mode img {
+  filter: brightness(0.8) contrast(1.2);
+}
 
   /* Responsive Adjustments */
   @media (max-width: 1000px) {
@@ -581,6 +935,37 @@
       padding: 10px 20px;
     }
   }
+
+  /* NEW: Scroll-to-top button */
+  #scrollToTopBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 200;
+    background: var(--primary);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 5px 15px rgba(255,143,171,0.3);
+    cursor: pointer;
+    display: none; /* default hidden */
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  #scrollToTopBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(255,143,171,0.4);
+  }
+  body.dark-mode #scrollToTopBtn {
+    background: var(--dark-primary);
+    color: #fff;
+  }
+
+
 </style>
 </head>
 <body>
@@ -594,6 +979,8 @@
     <a href="#dex">DEX</a>
     <a href="#maker">Maker</a>
   </nav>
+  <!-- NEW: Dark Mode Toggle Button -->
+  <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
 </div>
 
 <!-- Hero -->
@@ -603,9 +990,10 @@
       <img src="dance.png" alt="Daughterjak Dancing">
     </div>
     <div class="hero-text">
-      <h1>Daughterjak ($DAUGHTER)</h1>
+      <!-- We'll replace h1 content dynamically using typed.js in JS below -->
+      <h1 id="heroTyped"></h1>
       <p>The cutest, funniest meme coin on Solana! Inspired by the beloved Wifejak, Daughterjak brings a fresh, youthful charm to the crypto world. Join us as we embrace her curious spirit and endless questions, and let’s take $DAUGHTER to the moon together!</p>
-      <a href="#maker" class="cta">Make Your Daughter</a>
+      <a href="#maker" class="cta">Make Daughterjak Memes</a>
     </div>
   </div>
 </section>
@@ -682,6 +1070,9 @@
   Daughterjak Meme Coin on Solana. | 
   <a href="https://knowyourmeme.com/memes/daughterjak" target="_blank">Know Your Meme</a>
 </div>
+
+<!-- Scroll-to-Top Button -->
+<button id="scrollToTopBtn">↑</button>
 
 <!-- New Emoji-From-Cursor Script -->
 <script>
@@ -781,6 +1172,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   scrollElements.forEach(el => {
     scrollObserver.observe(el);
+  });
+});
+
+/* NEW: typed.js usage for hero heading */
+document.addEventListener('DOMContentLoaded', () => {
+  const typedElement = document.getElementById('heroTyped');
+  if (typedElement) {
+    new Typed('#heroTyped', {
+      strings: ["Daughterjak ($DAUGHTER)"],
+      typeSpeed: 70,
+      backSpeed: 50,
+      startDelay: 300,
+      showCursor: false
+    });
+  }
+
+  /* Dark Mode Toggle */
+  const toggleBtn = document.getElementById('darkModeToggle');
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+  });
+
+  /* Scroll-to-top button logic */
+  const scrollBtn = document.getElementById('scrollToTopBtn');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      scrollBtn.style.display = 'flex';
+    } else {
+      scrollBtn.style.display = 'none';
+    }
+  });
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
 </script>
