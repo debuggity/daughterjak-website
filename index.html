@@ -3,37 +3,37 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Daughterjak ($DAUGHTER) - Meme Coin on Solana</title>
+<title>daughterjak ($daughter) - meme coin on solana</title>
 
-<!-- Google Fonts -->
+<!-- google fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<!-- OPTIONAL: Animate.css for fancy transitions -->
+<!-- optional: animate.css for fancy transitions -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-<!-- OPTIONAL: Typed.js script for text typing effect in the hero -->
-<!-- We will load it in the <head> just so it's ready, or you can load in body. -->
+<!-- optional: typed.js script for text typing effect in the hero -->
+<!-- we will load it in the <head> just so it's ready, or you can load in body. -->
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
 <style>
   :root {
-  --primary: #FF8FAB;        /* Warm pink */
-  --secondary: #FFC2C7;      /* Light pastel pink */
-  --dark-text: #2A1D1F;      /* Deep warm brownish */
-  --light-text: #7D5E63;     /* Muted brownish for body */
-  --bg: #FFF7F9;             /* Light pinkish background */
-  --accent: #FFE8EE;         /* Accent background */
+  --primary: #FF8FAB;        /* warm pink */
+  --secondary: #FFC2C7;      /* light pastel pink */
+  --dark-text: #2A1D1F;      /* deep warm brownish */
+  --light-text: #7D5E63;     /* muted brownish for body */
+  --bg: #FFF7F9;             /* light pinkish background */
+  --accent: #FFE8EE;         /* accent background */
   --heading-font: 'Baloo 2', cursive;
   --body-font: 'Nunito', sans-serif;
 
-  /* NEW COLORS FOR DARK MODE */
+  /* new colors for dark mode */
   --dark-bg: #1a1a1a;
   --dark-primary: #FFAAC2;
   --dark-secondary: #bbbbbb;
-  --hero-text-shadow: none; /* Removed text shadow for better visibility */
+  --hero-text-shadow: none; /* removed text shadow for better visibility */
 }
 
-/* Reset and Base Styles */
+/* reset and base styles */
 * {
   box-sizing: border-box;
 }
@@ -44,28 +44,28 @@ body {
   font-family: var(--body-font);
   background: linear-gradient(120deg, var(--bg) 50%, #ffffff 50%);
   color: var(--light-text);
-  overflow-x: hidden; /* Prevent horizontal scroll if any effect shifts elements */
+  overflow-x: hidden; /* prevent horizontal scroll if any effect shifts elements */
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Dark mode body override */
+/* dark mode body override */
 body.dark-mode {
   background: linear-gradient(120deg, var(--dark-bg) 50%, #333333 50%);
   color: var(--dark-secondary);
 }
 
-/* Images and Videos */
+/* images and videos */
 img, video {
   max-width: 100%;
   height: auto;
 }
 
-/* Smooth scrolling for anchor links */
+/* smooth scrolling for anchor links */
 html {
   scroll-behavior: smooth;
 }
 
-/* Header */
+/* header */
 .header {
   background: #ffffffdd;
   backdrop-filter: blur(5px);
@@ -80,7 +80,7 @@ html {
   transition: background 0.3s ease;
 }
 
-/* Dark mode header */
+/* dark mode header */
 body.dark-mode .header {
   background: #2c2c2cdd;
 }
@@ -120,7 +120,7 @@ body.dark-mode .header nav a:hover {
   color: var(--dark-primary);
 }
 
-/* Dark mode toggle button */
+/* dark mode toggle button */
 .dark-mode-toggle {
   background: none;
   border: 2px solid var(--primary);
@@ -147,7 +147,7 @@ body.dark-mode .dark-mode-toggle:hover {
   color: #fff;
 }
 
-/* Scroll Fade-In Animation Container */
+/* scroll fade-in animation container */
 .scroll-animation {
   opacity: 0;
   transform: translateY(40px);
@@ -160,13 +160,13 @@ body.dark-mode .dark-mode-toggle:hover {
   transform: translateY(0);
 }
 
-/* Hero Section */
+/* hero section */
 .hero {
   position: relative;
-  /* Original background image */
+  /* original background image */
   background: url('banner.png') no-repeat center center;
   background-size: cover;
-  background-attachment: fixed; /* Parallax effect */
+  background-attachment: fixed; /* parallax effect */
   padding: 100px 20px;
   display: flex;
   align-items: center;
@@ -176,8 +176,8 @@ body.dark-mode .dark-mode-toggle:hover {
 }
 
 body.dark-mode .hero {
-  background-image: none; /* Hide background image in dark mode */
-  background-color: var(--dark-bg); /* Optional: Set a dark background color */
+  background-image: none; /* hide background image in dark mode */
+  background-color: var(--dark-bg); /* optional: set a dark background color */
 }
 
 .hero-content {
@@ -193,7 +193,7 @@ body.dark-mode .hero {
   z-index: 0;
 }
 
-/* Dance animation for the hero image */
+/* dance animation for the hero image */
 @keyframes danceFlip {
   0% {
       transform: rotateY(0deg);
@@ -215,7 +215,7 @@ body.dark-mode .hero {
 }
 
 body.dark-mode .hero-image {
-  display: none; /* Hide hero image in dark mode */
+  display: none; /* hide hero image in dark mode */
 }
 
 .hero-image img {
@@ -227,7 +227,7 @@ body.dark-mode .hero-image {
 .hero-text {
   flex: 1 1 400px;
   color: #000000;
-  /* Text shadow removed for better visibility */
+  /* text shadow removed for better visibility */
 }
 
 .hero-text h1 {
@@ -245,12 +245,12 @@ body.dark-mode .hero-image {
 }
 
 body.dark-mode .hero-text p {
-  color: #dddddd; /* Lighten paragraph text in dark mode */
+  color: #dddddd; /* lighten paragraph text in dark mode */
 }
 
 body.dark-mode .hero-text h1 {
-  color: #ffffff; /* Ensure the heading is clearly visible */
-  text-shadow: none; /* Remove text shadow */
+  color: #ffffff; /* ensure the heading is clearly visible */
+  text-shadow: none; /* remove text shadow */
 }
 
 .hero-text .cta {
@@ -265,6 +265,7 @@ body.dark-mode .hero-text h1 {
   transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
   font-family: var(--heading-font);
   display: inline-block;
+  margin-right: 10px;
 }
 
 .hero-text .cta:hover {
@@ -273,7 +274,32 @@ body.dark-mode .hero-text h1 {
   transform: scale(1.05);
 }
 
-/* Dark mode cta color shift */
+/* new extra-loud buy cta */
+.buy-cta {
+  background-color: #ff40b5;
+  color: #fff;
+  padding: 18px 35px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 800;
+  box-shadow: 0 5px 20px rgba(255,64,181,0.4);
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-family: var(--heading-font);
+  display: inline-block;
+  text-transform: uppercase;
+  border: 3px solid #fff;
+}
+
+.buy-cta:hover {
+  background-color: #ff72c7;
+  box-shadow: 0 8px 25px rgba(255,64,181,0.6);
+  transform: scale(1.08);
+}
+
+/* dark mode cta color shift */
 body.dark-mode .hero-text .cta {
   background-color: var(--dark-primary);
 }
@@ -282,7 +308,7 @@ body.dark-mode .hero-text .cta:hover {
   background-color: var(--secondary);
 }
 
-/* About Section */
+/* about section */
 .about {
   padding: 100px 20px;
   text-align: left;
@@ -314,7 +340,7 @@ body.dark-mode .about h2 {
 }
 
 body.dark-mode .about p {
-  color: #dddddd; /* Lighten text in dark mode */
+  color: #dddddd; /* lighten text in dark mode */
 }
 
 .about-image {
@@ -385,7 +411,7 @@ body.dark-mode .about p {
 }
 
 body.dark-mode .highlight {
-  background: #3a3a3a; /* Darker background for highlights in dark mode */
+  background: #3a3a3a; /* darker background for highlights in dark mode */
 }
 
 body.dark-mode .highlight h3 {
@@ -393,10 +419,10 @@ body.dark-mode .highlight h3 {
 }
 
 body.dark-mode .highlight p {
-  color: #cccccc; /* Lighten text in highlights */
+  color: #cccccc; /* lighten text in highlights */
 }
 
-/* Community Section */
+/* community section */
 .community {
   padding: 100px 20px;
   text-align: center;
@@ -431,7 +457,7 @@ body.dark-mode .community h2 {
 }
 
 body.dark-mode .community p {
-  color: #dddddd; /* Lighten text in dark mode */
+  color: #dddddd; /* lighten text in dark mode */
 }
 
 .community .community-image {
@@ -499,7 +525,7 @@ body.dark-mode .social-links a:hover {
   color: #fff;
 }
 
-/* DEX Section */
+/* dex section */
 .dex {
   padding: 100px 20px;
   display: flex;
@@ -532,7 +558,7 @@ body.dark-mode .dex h2 {
 }
 
 body.dark-mode .dex p {
-  color: #dddddd; /* Lighten text in dark mode */
+  color: #dddddd; /* lighten text in dark mode */
 }
 
 .dex .dex-image {
@@ -593,7 +619,7 @@ body.dark-mode .dex-link:hover {
   background: var(--secondary);
 }
 
-/* Maker Section */
+/* maker section */
 .maker {
   padding: 100px 20px;
   text-align: center;
@@ -630,7 +656,7 @@ body.dark-mode .maker h2 {
 }
 
 body.dark-mode .maker p {
-  color: #dddddd; /* Lighten text in dark mode */
+  color: #dddddd; /* lighten text in dark mode */
   font-weight: 600;
 }
 
@@ -685,7 +711,7 @@ body.dark-mode .cta-maker:hover {
   background-color: var(--secondary);
 }
 
-/* Footer */
+/* footer */
 .footer {
   text-align: center;
   padding: 40px 20px;
@@ -712,10 +738,10 @@ body.dark-mode .footer a {
   color: var(--dark-primary);
 }
 
-/* Responsive Adjustments */
+/* responsive adjustments */
 @media (max-width: 1000px) {
   .hero {
-    background-attachment: scroll; /* Disable parallax on smaller screens for performance */
+    background-attachment: scroll; /* disable parallax on smaller screens for performance */
   }
 }
 
@@ -769,7 +795,7 @@ body.dark-mode .footer a {
   }
 }
 
-/* Scroll-to-top button */
+/* scroll-to-top button */
 #scrollToTopBtn {
   position: fixed;
   bottom: 30px;
@@ -800,30 +826,30 @@ body.dark-mode #scrollToTopBtn {
   color: #fff;
 }
 
-/* Additional Dark Mode Adjustments */
+/* additional dark mode adjustments */
 
-/* General Text Adjustments in Dark Mode */
+/* general text adjustments in dark mode */
 body.dark-mode {
-  color: #cccccc; /* Base text color */
+  color: #cccccc; /* base text color */
 }
 
 body.dark-mode .header nav a {
-  color: #bbbbbb; /* Navigation links */
+  color: #bbbbbb; /* navigation links */
 }
 
 body.dark-mode .header nav a:hover {
-  color: var(--dark-primary); /* Hover state */
+  color: var(--dark-primary); /* hover state */
 }
 
 body.dark-mode .footer {
-  color: #aaaaaa; /* Footer text */
+  color: #aaaaaa; /* footer text */
 }
 
 body.dark-mode .footer a {
-  color: var(--dark-primary); /* Footer links */
+  color: var(--dark-primary); /* footer links */
 }
 
-/* About Section in Dark Mode */
+/* about section in dark mode */
 body.dark-mode .about h2 {
   color: var(--dark-primary);
 }
@@ -832,7 +858,7 @@ body.dark-mode .about p {
   color: #dddddd;
 }
 
-/* Community Section in Dark Mode */
+/* community section in dark mode */
 body.dark-mode .community h2 {
   color: var(--dark-primary);
 }
@@ -841,7 +867,7 @@ body.dark-mode .community p {
   color: #dddddd;
 }
 
-/* DEX Section in Dark Mode */
+/* dex section in dark mode */
 body.dark-mode .dex h2 {
   color: var(--dark-primary);
 }
@@ -850,7 +876,7 @@ body.dark-mode .dex p {
   color: #dddddd;
 }
 
-/* Maker Section in Dark Mode */
+/* maker section in dark mode */
 body.dark-mode .maker h2 {
   color: var(--dark-primary);
 }
@@ -859,7 +885,7 @@ body.dark-mode .maker p {
   color: #dddddd;
 }
 
-/* Button Adjustments in Dark Mode */
+/* button adjustments in dark mode */
 body.dark-mode .cta, 
 body.dark-mode .cta-maker, 
 body.dark-mode .dex-link {
@@ -874,176 +900,95 @@ body.dark-mode .dex-link:hover {
   color: #ffffff;
 }
 
-/* Image Adjustments in Dark Mode */
+/* image adjustments in dark mode */
 body.dark-mode img {
   filter: brightness(0.8) contrast(1.2);
 }
-
-  /* Responsive Adjustments */
-  @media (max-width: 1000px) {
-    .hero {
-      background-attachment: scroll; /* Disable parallax on smaller screens for performance */
-    }
-  }
-
-  @media (max-width: 768px) {
-    .hero-content {
-      flex-direction: column;
-      text-align: center;
-    }
-    .hero-text, .hero-image {
-      flex: none;
-      max-width: 100%;
-    }
-    .hero-text h1 {
-      font-size: 2rem;
-    }
-    .hero-text p {
-      font-size: 1rem;
-    }
-
-    .about, .dex {
-      flex-direction: column;
-      text-align: center;
-    }
-    .about-text, .dex-text {
-      max-width: 100%;
-    }
-    .about-image, .dex-image {
-      order: -1;
-    }
-    .highlight {
-      flex: 1 1 calc(50% - 30px);
-    }
-    .community p,
-    .dex p,
-    .maker p {
-      font-size: 1rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .highlight {
-      flex: 1 1 100%;
-    }
-    .social-links a {
-      font-size: 0.9rem;
-      padding: 10px 20px;
-    }
-    .dex-link, .cta, .cta-maker {
-      font-size: 0.9rem;
-      padding: 10px 20px;
-    }
-  }
-
-  /* NEW: Scroll-to-top button */
-  #scrollToTopBtn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 200;
-    background: var(--primary);
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    box-shadow: 0 5px 15px rgba(255,143,171,0.3);
-    cursor: pointer;
-    display: none; /* default hidden */
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 1.5rem;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  #scrollToTopBtn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(255,143,171,0.4);
-  }
-  body.dark-mode #scrollToTopBtn {
-    background: var(--dark-primary);
-    color: #fff;
-  }
-
-
 </style>
 </head>
 <body>
 
-<!-- Header -->
+<!-- header -->
 <div class="header">
-  <div class="logo">Daughterjak</div>
+  <div class="logo">daughterjak</div>
   <nav>
-    <a href="#about">About</a>
-    <a href="#community">Community</a>
-    <a href="#dex">DEX</a>
-    <a href="#maker">Maker</a>
+    <a href="#about">about</a>
+    <a href="#community">community</a>
+    <a href="#dex">dex</a>
+    <a href="#maker">maker</a>
   </nav>
-  <!-- NEW: Dark Mode Toggle Button -->
-  <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
+  <!-- new: dark mode toggle button -->
+  <button class="dark-mode-toggle" id="darkModeToggle">dark mode</button>
 </div>
 
-<!-- Hero -->
+<!-- hero -->
 <section class="hero scroll-animation">
   <div class="hero-content">
     <div class="hero-image">
-      <img src="dance.png" alt="Daughterjak Dancing">
+      <img src="dance.png" alt="daughterjak dancing">
     </div>
     <div class="hero-text">
-      <!-- We'll replace h1 content dynamically using typed.js in JS below -->
+      <!-- we'll replace h1 content dynamically using typed.js in js below -->
       <h1 id="heroTyped"></h1>
-      <p>The cutest, funniest meme coin on Solana! Inspired by the beloved Wifejak, Daughterjak brings a fresh, youthful charm to the crypto world. Join us as we embrace her curious spirit and endless questions, and let’s take $DAUGHTER to the moon together!</p>
-      <a href="#maker" class="cta">Make Daughterjak Memes</a>
+      <p>the cutest, funniest meme coin on solana! inspired by the beloved wifejak, daughterjak brings a fresh, youthful charm to the crypto world. join us as we embrace her curious spirit and endless questions, and let’s take $daughter to the moon together!</p>
+      
+      <!-- new buy button above the meme button -->
+      <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E6ZeLyFUvpaSREvAv1rVu91kndLD3tdpvkcA51bxpump" 
+         class="buy-cta">
+         buy daughterjak
+      </a>
+      
+      <a href="#maker" class="cta">make daughterjak memes</a>
     </div>
   </div>
 </section>
 
-<!-- About Section -->
+<!-- about section -->
 <section class="about scroll-animation" id="about">
   <div class="about-text">
-    <h2>What is $DAUGHTER?</h2>
-    <p>Daughterjak is a meme token that channels the joyful energy and boundless curiosity of a young daughter. Building on the Wifejak meme lineage, Daughterjak is a community-driven project that thrives on humor, creativity, and a shared love of mischief. It’s not just another token; it’s a story we write together.</p>
+    <h2>what is $daughter?</h2>
+    <p>daughterjak is a meme token that channels the joyful energy and boundless curiosity of a young daughter. building on the wifejak meme lineage, daughterjak is a community-driven project that thrives on humor, creativity, and a shared love of mischief. it’s not just another token; it’s a story we write together.</p>
     <div class="highlights">
       <div class="highlight">
         <h3>100%</h3>
-        <p>Community-Owned</p>
+        <p>community-owned</p>
       </div>
       <div class="highlight">
         <h3>5k+</h3>
-        <p>Active Followers on X</p>
+        <p>active followers on x</p>
       </div>
       <div class="highlight">
         <h3>24/7</h3>
-        <p>Meme Magic</p>
+        <p>meme magic</p>
       </div>
     </div>
   </div>
   <div class="about-image">
-    <img src="cute.png" alt="Cute Daughterjak">
+    <img src="cute.png" alt="cute daughterjak">
   </div>
 </section>
 
-<!-- Community Section -->
+<!-- community section -->
 <section class="community scroll-animation" id="community">
   <div class="community-image">
-    <img src="stars.png" alt="Daughterjak Stars">
+    <img src="stars.png" alt="daughterjak stars">
   </div>
-  <h2>Join the Family</h2>
-  <p>Daughterjak is all about friends, fun, and memes. Our community hangs out on Telegram, laughs on X, and shares hilarious Daughterjak creations daily. Let’s build this adventure together!</p>
+  <h2>join the family</h2>
+  <p>daughterjak is all about friends, fun, and memes. our community hangs out on telegram, laughs on x, and shares hilarious daughterjak creations daily. let’s build this adventure together!</p>
   
   <div class="social-links">
-    <a href="https://x.com/Daughterjaksol" target="_blank">X</a>
-    <a href="https://t.me/daughterjakcto" target="_blank">Telegram</a>
-    <a href="https://knowyourmeme.com/memes/daughterjak" target="_blank">Know Your Meme</a>
+    <a href="https://x.com/Daughterjaksol" target="_blank">x</a>
+    <a href="https://t.me/daughterjakcto" target="_blank">telegram</a>
+    <a href="https://knowyourmeme.com/memes/daughterjak" target="_blank">know your meme</a>
   </div>
 </section>
 
-<!-- DEX Section -->
+<!-- dex section -->
 <section class="dex scroll-animation" id="dex">
   <div class="dex-text">
-    <h2>Get $DAUGHTER</h2>
-    <p>Ready to become part of the Daughterjak story? Trade $DAUGHTER on Solana DEXes and join the ride. Our token address is easy to remember—just as Daughterjak’s questions are endless!</p>
-    <p><strong>Token Address:</strong><br> 
+    <h2>get $daughter</h2>
+    <p>ready to become part of the daughterjak story? trade $daughter on solana dexes and join the ride. our token address is easy to remember—just as daughterjak’s questions are endless!</p>
+    <p><strong>token address:</strong><br> 
       <a href="https://dexscreener.com/solana/jve4zgga3e3qiphv4bg6yvuv44ru7ydzugp2lsyzax3" 
          target="_blank" class="dex-link">
         E6ZeLyFUvpaSREvAv1rVu91kndLD3tdpvkcA51bxpump
@@ -1051,33 +996,33 @@ body.dark-mode img {
     </p>
   </div>
   <div class="dex-image">
-    <img src="shopping-bag.png" alt="Daughterjak Shopping">
+    <img src="shopping-bag.png" alt="daughterjak shopping">
   </div>
 </section>
 
-<!-- Maker Section -->
+<!-- maker section -->
 <section class="maker scroll-animation" id="maker">
   <div class="maker-image">
-    <img src="love.png" alt="Daughterjak Love">
+    <img src="love.png" alt="daughterjak love">
   </div>
-  <h2>Make Your Daughter</h2>
-  <p>Unleash your creativity and generate your own Daughterjak scenario! Swap backgrounds, change outfits, and give your Daughterjak a personality that suits you. Let’s create a new meme magic moment together!</p>
-  <a href="maker.html" class="cta-maker">Launch Maker</a>
+  <h2>make your daughter</h2>
+  <p>unleash your creativity and generate your own daughterjak scenario! swap backgrounds, change outfits, and give your daughterjak a personality that suits you. let’s create a new meme magic moment together!</p>
+  <a href="maker.html" class="cta-maker">launch maker</a>
 </section>
 
-<!-- Footer -->
+<!-- footer -->
 <div class="footer">
-  Daughterjak Meme Coin on Solana. | 
-  <a href="https://knowyourmeme.com/memes/daughterjak" target="_blank">Know Your Meme</a>
+  daughterjak meme coin on solana. | 
+  <a href="https://knowyourmeme.com/memes/daughterjak" target="_blank">know your meme</a>
 </div>
 
-<!-- Scroll-to-Top Button -->
+<!-- scroll-to-top button -->
 <button id="scrollToTopBtn">↑</button>
 
-<!-- New Emoji-From-Cursor Script -->
+<!-- new emoji-from-cursor script -->
 <script>
 /**
- * This script spawns a small emoji at the cursor or finger location,
+ * this script spawns a small emoji at the cursor or finger location,
  * then animates it outward in a quick burst before fading away.
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -1088,7 +1033,7 @@ document.addEventListener('DOMContentLoaded', () => {
     "🥳", "🛍️", "🐾", "👗", "🖍️", "📖", "🎈", "🎁", "🩷", "🥰"
   ];
 
-  // Container to hold our floating emojis
+  // container to hold our floating emojis
   const emojiContainer = document.createElement('div');
   emojiContainer.style.position = 'fixed';
   emojiContainer.style.top = 0;
@@ -1100,7 +1045,7 @@ document.addEventListener('DOMContentLoaded', () => {
   emojiContainer.style.overflow = 'hidden';
   document.body.appendChild(emojiContainer);
 
-  // Function to spawn and animate an emoji at (x, y)
+  // function to spawn and animate an emoji at (x, y)
   function spawnEmoji(x, y) {
     const emojiEl = document.createElement('span');
     emojiEl.textContent = emojis[Math.floor(Math.random() * emojis.length)];
@@ -1112,7 +1057,7 @@ document.addEventListener('DOMContentLoaded', () => {
     emojiEl.style.userSelect = 'none';
     emojiContainer.appendChild(emojiEl);
 
-    // Animate outward in a random direction
+    // animate outward in a random direction
     const horizontalMove = (Math.random() - 0.5) * 200; // -100 to 100
     const verticalMove = (Math.random() - 1) * 200;    // bias going up
 
@@ -1124,7 +1069,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const elapsed = timestamp - start;
       const progress = Math.min(elapsed / duration, 1);
 
-      // Move and fade out
+      // move and fade out
       const currentX = x + horizontalMove * progress;
       const currentY = y + verticalMove * progress;
       emojiEl.style.transform = `translate(${currentX - x}px, ${currentY - y}px)`;
@@ -1133,7 +1078,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (progress < 1) {
         requestAnimationFrame(animateEmoji);
       } else {
-        // Remove the emoji once animation is complete
+        // remove the emoji once animation is complete
         emojiContainer.removeChild(emojiEl);
       }
     }
@@ -1141,12 +1086,12 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(animateEmoji);
   }
 
-  // Mouse move listener
+  // mouse move listener
   document.addEventListener('mousemove', (e) => {
     spawnEmoji(e.clientX, e.clientY);
   });
 
-  // Touch move listener (for mobile)
+  // touch move listener (for mobile)
   document.addEventListener('touchmove', (e) => {
     // for each touch, spawn an emoji
     for (let i = 0; i < e.touches.length; i++) {
@@ -1154,7 +1099,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  /* Scroll-based fade-in animations using IntersectionObserver */
+  /* scroll-based fade-in animations using intersectionobserver */
   const scrollElements = document.querySelectorAll('.scroll-animation');
   const observerOptions = {
     root: null,
@@ -1175,12 +1120,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/* NEW: typed.js usage for hero heading */
+/* new: typed.js usage for hero heading */
 document.addEventListener('DOMContentLoaded', () => {
   const typedElement = document.getElementById('heroTyped');
   if (typedElement) {
     new Typed('#heroTyped', {
-      strings: ["Daughterjak ($DAUGHTER)"],
+      strings: ["daughterjak ($daughter)"],
       typeSpeed: 70,
       backSpeed: 50,
       startDelay: 300,
@@ -1188,13 +1133,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* Dark Mode Toggle */
+  /* dark mode toggle */
   const toggleBtn = document.getElementById('darkModeToggle');
   toggleBtn.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
   });
 
-  /* Scroll-to-top button logic */
+  /* scroll-to-top button logic */
   const scrollBtn = document.getElementById('scrollToTopBtn');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 300) {
